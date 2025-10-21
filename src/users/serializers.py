@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer
-
+from .models import CustomUser
 class CustomUserSerializer(ModelSerializer):
-    pass
+    class Meta:
+        model = CustomUser
+        fields = ("id","email","username","created_at")
