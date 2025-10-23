@@ -7,5 +7,5 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     password = models.CharField(null=False)
     created_at = models.TimeField(auto_now_add=True)
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["email"]
     objects = CustomUserManager()
