@@ -1,5 +1,5 @@
 
-.PHONY: dev prod flush
+.PHONY: dev prod flush superuser
 
 dev:
 	@echo "bulding dev container"
@@ -10,3 +10,6 @@ prod:
 flush:
 	@echo "Flushing dev database"
 	docker exec -it snakey_reception_dev python manage.py flush
+superuser:
+	@echo "Running createsuperuser"
+	docker exec -it snakey_reception_dev python manage.py createsuperuser
