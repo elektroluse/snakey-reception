@@ -1,5 +1,5 @@
 
-.PHONY: dev prod flush superuser
+.PHONY: dev prod flush superuser dbshell
 
 dev:
 	@echo "bulding dev container"
@@ -13,3 +13,7 @@ flush:
 superuser:
 	@echo "Running createsuperuser"
 	docker exec -it snakey_reception_dev python manage.py createsuperuser
+
+dbshell:
+	@echo "logging into db shell"
+	docker exec -it snakey_reception_db psql -U devuser -d dev_database
