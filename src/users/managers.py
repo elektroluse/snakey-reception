@@ -7,6 +7,7 @@ class CustomUserManager(BaseUserManager):
         email,
         password = None,
         **extra_fields):
+               
         if not email:
             raise ValueError("Email not supplied")
         email = self.normalize_email(email)
@@ -27,4 +28,4 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("superuser creation requires is_staff")
         if not extra_fields.get("is_superuser"):
             raise ValueError("superuser creation requires is_superuser")
-        return self.create_user(username, email, password)
+        return self.create_user(username, email, password, **extra_fields)
