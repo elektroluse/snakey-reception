@@ -1,4 +1,5 @@
 django
 django[bcrypt]
 djangorestframework
+djangorestframework-simplejwt
 psycopg[binary]
