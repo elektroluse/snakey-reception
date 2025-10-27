@@ -10,3 +10,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default = False)
     REQUIRED_FIELDS = ["email"]
     objects = CustomUserManager()
+    
+    class Meta:
+        db_table = "user"
+        verbose_name = "user"
+        verbose_name_plural = "users"
