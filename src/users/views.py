@@ -25,6 +25,8 @@ class UserRegistrationView(CreateAPIView):
         )
 
 class LoginView(APIView):
+    permission_classes = ()
+    authentication_classes = ()
     def post(self, request):
         service_response = UserService.login(request.data)
         
