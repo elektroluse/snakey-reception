@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, CreateAPIView
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -38,14 +38,14 @@ class LoginView(APIView):
                 value = service_response.access_token,
                 httponly = True,
                 secure = True,
-                samesite = "Strict"
+                samesite = "None"
             )
             response.set_cookie(
                 key = "refresh",
                 value = service_response.refresh,
                 httponly = True,
                 secure = True,
-                samesite = "Strict"
+                samesite = "None"
             )
             return response
         return Response(
@@ -72,7 +72,7 @@ class LogoutView(APIView):
         status = status.HTTP_200_OK)
         response.delete_cookie(key = "access_token")
         response.delete_cookie(key = "refresh")
-        return 
+        return response
 
 class CookieTokenRefreshView(TokenRefreshView):
     def post(self,request):
@@ -90,14 +90,14 @@ class CookieTokenRefreshView(TokenRefreshView):
                 value = access_token,
                 httponly = True,
                 secure = True,
-                samesite = "Strict"
+                samesite = "None"
             )
             response.set_cookie(
                 key = "refresh",
                 value = refresh,
                 httponly = True,
                 secure = True,
-                samesite = "Strict"
+                samesite = "None"
             )
             return response
         except InvalidToken:
