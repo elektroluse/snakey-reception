@@ -1,4 +1,7 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+from django.contrib.auth import authenticate
 from .models import CustomUser
 class CustomUserSerializer(ModelSerializer):
     class Meta:
@@ -17,3 +20,14 @@ class RegisterUserSerializer(ModelSerializer):
     def create(self, validated_data):
         user = CustomUser.objects.create_user(**validated_data)
         return user
+
+class LoginUserSerializer(Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise ValidationError("Invalid Login")
+

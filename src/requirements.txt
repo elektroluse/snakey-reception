@@ -2,4 +2,5 @@ django
 django[bcrypt]
 djangorestframework
 djangorestframework-simplejwt[crypto]
+django-cors-headers
 psycopg[binary]
