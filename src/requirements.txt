@@ -4,3 +4,4 @@ djangorestframework
 djangorestframework-simplejwt[crypto]
 django-cors-headers
 psycopg[binary]
+django-kafka
