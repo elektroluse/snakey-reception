@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "users",
-    "django-kafka",
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     "rest_framework_simplejwt",
@@ -161,3 +160,4 @@ SIMPLE_JWT = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
