@@ -1,5 +1,5 @@
 
-.PHONY: dev prod flush superuser dbshell
+.PHONY: dev prod flush superuser dbshell kafkashell
 
 dev:
 	@echo "bulding dev container"
@@ -17,3 +17,7 @@ superuser:
 dbshell:
 	@echo "logging into db shell"
 	docker exec -it snakey_reception_db psql -U devuser -d dev_database
+
+kafkashell:
+	@echo "Opening a shell in kafka container"
+	docker exec -it -w /opt/kafka/bin broker sh
