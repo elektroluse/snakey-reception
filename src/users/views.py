@@ -8,7 +8,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.exceptions import InvalidToken
 from .serializers import CustomUserSerializer, RegisterUserSerializer
-from .services import UserService
+from .services import UserService, RegistrationProducer
 class UserInfoView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = CustomUserSerializer
@@ -17,8 +17,10 @@ class UserInfoView(RetrieveUpdateDestroyAPIView):
 
 class UserRegistrationView(CreateAPIView):
     serializer_class = RegisterUserSerializer
+    kafka_producer = RegistrationProducer()
     def post(self,request):
         response_data = UserService.create(request.data)
+        self.kafka_producer.publish(response_data)
         return Response(
             response_data,
             status = status.HTTP_201_CREATED
