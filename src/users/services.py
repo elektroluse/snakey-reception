@@ -3,15 +3,12 @@ from .serializers import RegisterUserSerializer, LoginUserSerializer, CustomUser
 from rest_framework.exceptions import NotFound, ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
 from .dtos.login_dto import LoginServiceResponse
-import socket
+from django.conf import settings
 import json
 from confluent_kafka import Producer
 class RegistrationProducer():
     def __init__(self) -> None:
-        conf = {
-            "bootstrap.servers" : "broker:29092",
-            "client.id" : socket.gethostname(), 
-        }
+        conf = settings.KAFKA_PRODUCER
         self.producer = Producer(conf)
     
     def publish(self, body):
