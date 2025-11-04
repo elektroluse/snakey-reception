@@ -1,9 +1,15 @@
+networks:
+  microservice-network:
+    name: snakey-reception-network
+
 services:
   web:
     build:
       context: .
       dockerfile: dev.Dockerfile
     container_name: snakey_reception_dev
+    networks:
+      - microservice-network
     ports:
       - 8000:8000
     volumes:
@@ -19,6 +25,8 @@ services:
       - .env
   db:
     image: postgres:16
+    networks:
+      - microservice-network
     container_name: snakey_reception_db
     volumes:
       - snakey_reception_db:/var/lib/postgresql/data
@@ -40,6 +48,8 @@ services:
   
   broker:
     image: apache/kafka:latest
+    networks:
+      - microservice-network
     hostname: broker
     container_name: broker
     ports:
